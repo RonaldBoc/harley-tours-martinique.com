@@ -182,6 +182,14 @@ import ReservationModal from '../components/ReservationModal.astro';
   gsap.registerPlugin(ScrollTrigger);
 
   document.addEventListener('DOMContentLoaded', function () {
+    // Scroll to hash anchor after GSAP has initialized ScrollTriggers
+    if (window.location.hash) {
+      const target = document.querySelector(window.location.hash);
+      if (target) {
+        setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+      }
+    }
+
     gsap.from('.page-hero-content > *', {
       y: 30,
       opacity: 0,

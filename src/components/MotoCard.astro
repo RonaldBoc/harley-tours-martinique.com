@@ -21,16 +21,20 @@ const badgeColorMap = {
 ---
 
 <div class="moto-card">
-  <div class="card-image-wrap">
-    <img src={image} alt={name} class="card-image" />
-    <span class="card-badge" style={`background:${badgeColorMap[badgeColor]}`}>{badge}</span>
-  </div>
+  <a href={`/nos-motos#${reserveId}`} class="card-image-link" aria-label={`Voir ${name} en détail`}>
+    <div class="card-image-wrap">
+      <img src={image} alt={name} class="card-image" />
+      <span class="card-badge" style={`background:${badgeColorMap[badgeColor]}`}>{badge}</span>
+    </div>
+  </a>
   <div class="card-body">
     <div class="card-brand">
       <span class="brand-dot" style={`background:${brandColor}`}></span>
       <span class="brand-name">{brand}</span>
     </div>
-    <h3 class="card-name">{name}</h3>
+    <a href={`/nos-motos#${reserveId}`} class="card-name-link">
+      <h3 class="card-name">{name}</h3>
+    </a>
     <p class="card-tagline">{tagline}</p>
     <div class="card-footer">
       <div class="card-price">
@@ -61,6 +65,23 @@ const badgeColorMap = {
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.1);
   }
 
+  .card-image-link {
+    display: block;
+    cursor: pointer;
+  }
+
+  .card-name-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .card-name-link:hover .card-name {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+  }
+
   .card-image-wrap {
     height: 220px;
     background: linear-gradient(135deg, #f8f8f6, #efefeb);
@@ -78,7 +99,8 @@ const badgeColorMap = {
     transition: transform 0.4s ease;
   }
 
-  .moto-card:hover .card-image {
+  .moto-card:hover .card-image,
+  .card-image-link:hover .card-image {
     transform: scale(1.05);
   }
 
