@@ -1,0 +1,230 @@
+---
+---
+<div class="hero-slider" id="hero-slider">
+  <div class="slide" id="slide-0">
+    <img src="/images/hd-street-bob-tsp.png" alt="Harley-Davidson Street Bob 114" class="slide-img" />
+    <div class="slide-badge" id="badge-0" style="top:20px;right:20px;bottom:auto;left:auto;">
+      <span class="badge-brand">HARLEY-DAVIDSON</span>
+      <span class="badge-model">Street Bob 114</span>
+    </div>
+  </div>
+  <div class="slide" id="slide-1" style="transform:translateX(100%);">
+    <img src="/images/ducati_scrambler_tribute_hero_section.png" alt="Ducati Scrambler 1100 Tribute Pro" class="slide-img" />
+    <div class="slide-badge" id="badge-1" style="top:auto;right:auto;bottom:80px;left:40px;">
+      <span class="badge-brand">DUCATI</span>
+      <span class="badge-model">Scrambler 1100</span>
+    </div>
+  </div>
+  <div class="slide" id="slide-2" style="transform:translateX(100%);">
+    <img src="/images/Scrambler-Ducati-Urban-Motard-tsp.jpg" alt="Ducati Urban Motard 800" class="slide-img" />
+    <div class="slide-badge" id="badge-2" style="top:50%;right:20px;bottom:auto;left:auto;transform:translateY(-50%);">
+      <span class="badge-brand">DUCATI</span>
+      <span class="badge-model">Urban Motard 800</span>
+    </div>
+  </div>
+
+  <div class="slide-indicators">
+    <span class="indicator active" id="indicator-0"></span>
+    <span class="indicator" id="indicator-1"></span>
+    <span class="indicator" id="indicator-2"></span>
+  </div>
+</div>
+
+<style>
+  .hero-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide-img {
+    width: 88%;
+    height: 88%;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 60px rgba(0,0,0,0.15));
+    transition: transform 0.4s ease;
+  }
+
+  .hero-slider:hover .slide-img {
+    transform: scale(1.02);
+  }
+
+  .slide-badge {
+    position: absolute;
+    background: rgba(13, 13, 13, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 12px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 160px;
+  }
+
+  .badge-brand {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.55);
+    text-transform: uppercase;
+  }
+
+  .badge-model {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: #fff;
+  }
+
+  .slide-indicators {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+  }
+
+  .indicator {
+    width: 28px;
+    height: 2px;
+    background: #E8E8E5;
+    transition: background 0.3s;
+    display: block;
+  }
+
+  .indicator.active {
+    background: #0D0D0D;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  const SLIDE_DURATION = 5000;
+  let current = 0;
+  let autoplayTimer: ReturnType<typeof setTimeout> | null = null;
+  let rafaleComplete = false;
+
+  const slides = [
+    document.getElementById('slide-0')!,
+    document.getElementById('slide-1')!,
+    document.getElementById('slide-2')!
+  ];
+  const badges = [
+    document.getElementById('badge-0')!,
+    document.getElementById('badge-1')!,
+    document.getElementById('badge-2')!
+  ];
+  const indicators = [
+    document.getElementById('indicator-0')!,
+    document.getElementById('indicator-1')!,
+    document.getElementById('indicator-2')!
+  ];
+  const slider = document.getElementById('hero-slider')!;
+
+  const badgeStyles = [
+    { top: '20px', right: '20px', bottom: 'auto', left: 'auto', transform: 'none' },
+    { top: 'auto', right: 'auto', bottom: '80px', left: '40px', transform: 'none' },
+    { top: '50%', right: '20px', bottom: 'auto', left: 'auto', transform: 'translateY(-50%)' }
+  ];
+
+  function setIndicator(idx: number) {
+    indicators.forEach((ind, i) => ind.classList.toggle('active', i === idx));
+  }
+
+  function applyBadgeStyle(idx: number) {
+    const s = badgeStyles[idx];
+    const badge = badges[idx];
+    badge.style.top = s.top;
+    badge.style.right = s.right;
+    badge.style.bottom = s.bottom;
+    badge.style.left = s.left;
+    badge.style.transform = s.transform;
+  }
+
+  function showSlide(idx: number) {
+    const prev = current;
+    if (idx === prev) return;
+
+    gsap.to(badges[prev], { opacity: 0, y: -8, duration: 0.25, ease: 'power2.in' });
+    gsap.set(slides[idx], { x: '100%', opacity: 1 });
+    gsap.to(slides[prev], { x: '-100%', duration: 0.7, ease: 'power3.inOut' });
+    gsap.to(slides[idx], {
+      x: '0%',
+      duration: 0.7,
+      ease: 'power3.inOut',
+      onComplete: () => {
+        current = idx;
+        applyBadgeStyle(idx);
+        gsap.fromTo(badges[idx], { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' });
+        setIndicator(idx);
+      }
+    });
+  }
+
+  function nextSlide() {
+    showSlide((current + 1) % 3);
+  }
+
+  function startAutoplay() {
+    if (autoplayTimer) clearTimeout(autoplayTimer);
+    autoplayTimer = setTimeout(() => {
+      nextSlide();
+      startAutoplay();
+    }, SLIDE_DURATION);
+  }
+
+  // Rafale sequence
+  function initSlides() {
+    slides.forEach(s => gsap.set(s, { x: '100%', opacity: 1 }));
+    badges.forEach(b => { b.style.opacity = '0'; });
+  }
+
+  // Wait for load event then start rafale
+  window.addEventListener('load', () => {
+    initSlides();
+    setTimeout(() => {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          rafaleComplete = true;
+          current = 0;
+          applyBadgeStyle(0);
+          gsap.fromTo(badges[0], { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4 });
+          setIndicator(0);
+          startAutoplay();
+        }
+      });
+
+      tl.to(slides[0], { x: '0%', duration: 0.25, ease: 'power2.out' });
+      tl.to(slides[0], { x: '-100%', duration: 0.2, ease: 'power2.in' }, '+=0.05');
+      tl.set(slides[1], { x: '100%' });
+      tl.to(slides[1], { x: '0%', duration: 0.25, ease: 'power2.out' });
+      tl.to(slides[1], { x: '-100%', duration: 0.2, ease: 'power2.in' }, '+=0.05');
+      tl.set(slides[2], { x: '100%' });
+      tl.to(slides[2], { x: '0%', duration: 0.25, ease: 'power2.out' });
+      tl.to(slides[2], { x: '-100%', duration: 0.2, ease: 'power2.in' }, '+=0.05');
+      tl.set(slides[0], { x: '100%' });
+      tl.to(slides[0], { x: '0%', duration: 0.5, ease: 'power3.out' });
+    }, 1000);
+  });
+
+  slider.addEventListener('click', () => {
+    if (!rafaleComplete) return;
+    if (autoplayTimer) clearTimeout(autoplayTimer);
+    nextSlide();
+    startAutoplay();
+  });
+</script>

@@ -1,0 +1,78 @@
+:root {
+  --red: #E00714;
+  --orange: #FF6600;
+  --black: #0D0D0D;
+  --white: #FFFFFF;
+  --grey: #F5F5F3;
+  --grey2: #E8E8E5;
+  --muted: #888888;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #FFFFFF;
+  color: #0D0D0D;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  padding-top: 72px;
+}
+
+.btn-clip {
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+::selection {
+  background: #E00714;
+  color: white;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F5F5F3; }
+::-webkit-scrollbar-thumb { background: #0D0D0D; }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+input, textarea, select {
+  font-family: inherit;
+}
+
+/* Hero slider height on mobile */
+@media (max-width: 768px) {
+  main {
+    padding-top: 72px;
+  }
+}
+
+/* Prevent tap highlight on buttons */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+

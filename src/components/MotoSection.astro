@@ -1,0 +1,363 @@
+---
+interface Spec {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  number: string;
+  brand: string;
+  brandColor: string;
+  category: string;
+  categoryColor: string;
+  name: string;
+  tagline: string;
+  image: string;
+  specs: Spec[];
+  conditions: string[];
+  engine: string;
+  layout: 'image-left' | 'image-right';
+  bgColor?: string;
+  reserveId: string;
+}
+
+const {
+  number,
+  brand,
+  brandColor,
+  category,
+  categoryColor,
+  name,
+  tagline,
+  image,
+  specs,
+  conditions,
+  engine,
+  layout,
+  bgColor = 'var(--grey)',
+  reserveId
+} = Astro.props;
+
+const imageLeft = layout === 'image-left';
+---
+
+<section class:list={['moto-section', `moto-section--${layout}`]} data-moto-section>
+  <div class="section-photo" style={`background:${bgColor};`}>
+    <span class="section-number">{number}</span>
+    <div class="photo-inner">
+      <img src={image} alt={name} class="moto-photo" />
+    </div>
+  </div>
+  <div class="section-content">
+    <div class="content-inner">
+      <div class="moto-badge-row">
+        <span class="brand-dot" style={`background:${brandColor}`}></span>
+        <span class="brand-label">{brand}</span>
+        <span class="cat-badge" style={`background:${categoryColor}`}>{category}</span>
+      </div>
+      <h2 class="moto-name">{name}</h2>
+      <p class="moto-tagline">{tagline}</p>
+
+      <div class="specs-grid">
+        {specs.map(spec => (
+          <div class="spec-item">
+            <span class="spec-value">{spec.value}</span>
+            <span class="spec-label">{spec.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <p class="engine-note">{engine}</p>
+
+      <div class="conditions">
+        {conditions.map(cond => (
+          <span class="cond-tag">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="2,7 6,11 12,3"/>
+            </svg>
+            {cond}
+          </span>
+        ))}
+      </div>
+
+      <button
+        class="btn-clip reserve-btn"
+        data-open-modal
+        data-moto={reserveId}
+      >
+        RÉSERVER CETTE MOTO
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="2" y1="7" x2="12" y2="7"/>
+          <polyline points="8,3 12,7 8,11"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .moto-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 85vh;
+  }
+
+  .moto-section--image-right {
+    direction: rtl;
+  }
+
+  .moto-section--image-right > * {
+    direction: ltr;
+  }
+
+  .section-photo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .section-number {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 7rem;
+    line-height: 1;
+    color: var(--black);
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .photo-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .moto-photo {
+    width: 85%;
+    max-height: 60vh;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 60px rgba(0,0,0,0.12));
+    transition: transform 0.6s ease;
+  }
+
+  .section-photo:hover .moto-photo {
+    transform: scale(1.03) translateY(-6px);
+  }
+
+  .section-content {
+    border-left: 1px solid var(--grey2);
+    display: flex;
+    align-items: center;
+  }
+
+  .moto-section--image-right .section-content {
+    border-left: none;
+    border-right: 1px solid var(--grey2);
+    direction: ltr;
+  }
+
+  .content-inner {
+    padding: 80px 8%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .moto-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .brand-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .cat-badge {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: white;
+    padding: 3px 10px;
+    text-transform: uppercase;
+  }
+
+  .moto-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    letter-spacing: 0.03em;
+    line-height: 1;
+  }
+
+  .moto-tagline {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 460px;
+  }
+
+  .specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--grey2);
+    border: 1px solid var(--grey2);
+  }
+
+  .spec-item {
+    background: white;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .spec-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+
+  .spec-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .engine-note {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.5;
+    font-style: italic;
+    padding-top: 4px;
+  }
+
+  .conditions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .cond-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--black);
+    background: var(--grey);
+    border: 1px solid var(--grey2);
+    padding: 6px 12px;
+  }
+
+  .reserve-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 16px 32px;
+    background: var(--red);
+    color: var(--white);
+    transition: background 0.2s;
+    align-self: flex-start;
+    margin-top: 8px;
+  }
+
+  .reserve-btn:hover {
+    background: #c00612;
+  }
+
+  /* ---- Tablet ---- */
+  @media (max-width: 1024px) {
+    .content-inner {
+      padding: 60px 6%;
+      gap: 20px;
+    }
+  }
+
+  /* ---- Mobile ---- */
+  @media (max-width: 768px) {
+    .moto-section,
+    .moto-section--image-right {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      direction: ltr;
+    }
+
+    /* Always show photo first, content second */
+    .moto-section--image-right {
+      direction: ltr;
+    }
+
+    .moto-section--image-right .section-content {
+      border-right: none;
+      border-top: 1px solid var(--grey2);
+    }
+
+    .section-photo {
+      min-height: 280px;
+    }
+
+    .photo-inner {
+      padding: 40px 24px;
+    }
+
+    .moto-photo {
+      width: 90%;
+      max-height: 40vh;
+    }
+
+    .section-number {
+      font-size: 4rem;
+    }
+
+    .section-content {
+      border-left: none;
+      border-top: 1px solid var(--grey2);
+    }
+
+    .content-inner {
+      padding: 40px 6%;
+      gap: 18px;
+    }
+
+    .moto-name {
+      font-size: clamp(2rem, 8vw, 2.8rem);
+    }
+
+    .moto-tagline {
+      max-width: 100%;
+    }
+
+    .reserve-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

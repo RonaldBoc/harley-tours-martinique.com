@@ -1,17 +1,866 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import HeroSlider from '../components/HeroSlider.astro';
+import MotoCard from '../components/MotoCard.astro';
+import ReservationModal from '../components/ReservationModal.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="Location Moto Martinique — Harley-Davidson & Ducati | Harley Tours Martinique"
+  description="Louez une moto d'exception en Martinique. Harley-Davidson Street Bob 114, Ducati Scrambler 1100 Tribute Pro et Urban Motard 800. Location à la journée, sur réservation."
+  canonical="https://harley-tours-martinique.com/"
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <svg class="hero-topo" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="300" cy="300" rx="280" ry="280" stroke="#E8E8E5" stroke-width="1"/>
+        <ellipse cx="300" cy="300" rx="230" ry="230" stroke="#E8E8E5" stroke-width="1"/>
+        <ellipse cx="300" cy="300" rx="180" ry="180" stroke="#E8E8E5" stroke-width="1"/>
+        <ellipse cx="300" cy="300" rx="130" ry="130" stroke="#E8E8E5" stroke-width="1"/>
+        <ellipse cx="300" cy="300" rx="80" ry="80" stroke="#E8E8E5" stroke-width="1"/>
+        <ellipse cx="300" cy="300" rx="30" ry="30" stroke="#E8E8E5" stroke-width="1"/>
+      </svg>
+      <svg class="hero-triangle" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="300,0 300,300 0,0" fill="#E00714" opacity="0.06"/>
+      </svg>
+      <div class="hero-dots"></div>
+    </div>
+
+    <div class="hero-left">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span class="hero-title-line">LOUEZ DES MOTOS</span>
+          <span class="hero-title-line red">D'EXCEPTION</span>
+        </h1>
+        <p class="hero-sub">Harley-Davidson ou Ducati <br> Machines d'exception pour explorer la Martinique.</p>
+        <button class="btn-clip hero-btn" data-open-modal data-moto="">
+          RÉSERVER UNE MOTO
+        </button>
+      </div>
+
+    </div>
+
+    <div class="hero-right">
+      <HeroSlider />
+    </div>
+  </section>
+
+  <!-- BRANDS BAND -->
+  <section class="section-brands">
+    <span class="brands-label">NOS MARQUES</span>
+    <div class="brands-ticker-wrap">
+      <div class="brands-ticker">
+        <img src="/images/Ducati_logo.png" alt="Ducati" class="brand-logo" />
+        <img src="/images/logo_harley_davidson.png" alt="Harley-Davidson" class="brand-logo" />
+        <img src="/images/Ducati_logo.png" alt="Ducati" class="brand-logo" />
+        <img src="/images/logo_harley_davidson.png" alt="Harley-Davidson" class="brand-logo" />
+        <img src="/images/Ducati_logo.png" alt="Ducati" class="brand-logo" />
+        <img src="/images/logo_harley_davidson.png" alt="Harley-Davidson" class="brand-logo" />
+        <img src="/images/Ducati_logo.png" alt="Ducati" class="brand-logo" />
+        <img src="/images/logo_harley_davidson.png" alt="Harley-Davidson" class="brand-logo" />
+      </div>
+    </div>
+  </section>
+
+  <!-- NOS MACHINES -->
+  <section class="section-machines">
+    <div class="section-header">
+      <div class="section-header-left">
+        <h2 class="section-title">NOS MACHINES</h2>
+      </div>
+      <a href="/nos-motos" class="view-all">Voir toutes les motos &rarr;</a>
+    </div>
+    <div class="moto-grid">
+      <MotoCard
+        badge="CRUISER"
+        badgeColor="orange"
+        brand="Harley-Davidson"
+        brandColor="var(--orange)"
+        name="Street Bob 114"
+        tagline="Le son, le chrome, la route. Une légende américaine sous le soleil des Antilles."
+        image="/images/hd-street-bob-tsp.png"
+        reserveLabel="Harley-Davidson Street Bob 114"
+        reserveId="street-bob-114"
+      />
+      <MotoCard
+        badge="SCRAMBLER"
+        badgeColor="red"
+        brand="Ducati"
+        brandColor="var(--red)"
+        name="Scrambler 1100 Tribute Pro"
+        tagline="L'âme vintage, la puissance moderne. Pour ceux qui ne font pas les choses à moitié."
+        image="/images/ducati_scrambler_tribute_hero_section.png"
+        reserveLabel="Ducati Scrambler 1100 Tribute Pro"
+        reserveId="scrambler-1100"
+      />
+      <MotoCard
+        badge="URBAN"
+        badgeColor="black"
+        brand="Ducati"
+        brandColor="var(--red)"
+        name="Scrambler Urban Motard 800"
+        tagline="Agile, punchy, sans compromis. Parfaite pour les routes sinueuses de la Martinique."
+        image="/images/Scrambler-Ducati-Urban-Motard-tsp.jpg"
+        reserveLabel="Ducati Scrambler Urban Motard 800"
+        reserveId="urban-motard-800"
+      />
+    </div>
+  </section>
+
+  <!-- POURQUOI NOUS -->
+  <section class="section-why">
+    <div class="why-grid">
+      <div class="why-left">
+        <span class="eyebrow-orange">POURQUOI HARLEY TOURS MARTINIQUE</span>
+        <h2 class="why-title">UNE EXPÉRIENCE PENSÉE POUR LA MARTINIQUE</h2>
+        <p class="why-text">Des motos soigneusement entretenues, un service attentionné, et la Martinique comme terrain de jeu.</p>
+      </div>
+      <div class="why-right">
+        <div class="why-item">
+          <div class="why-icon">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#E00714" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <ellipse cx="18" cy="26" rx="14" ry="4"/>
+              <path d="M8 22c0-2 1-4 3-5l2-6h10l2 6c2 1 3 3 3 5"/>
+              <circle cx="11" cy="26" r="2.5"/>
+              <circle cx="25" cy="26" r="2.5"/>
+              <path d="M13 17h10"/>
+            </svg>
+          </div>
+          <div class="why-item-text">
+            <h3>Motos haut de gamme</h3>
+            <p>Harley-Davidson &amp; Ducati, entretenues avec exigence.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#E00714" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="8" width="24" height="22"/>
+              <line x1="6" y1="16" x2="30" y2="16"/>
+              <line x1="14" y1="4" x2="14" y2="12"/>
+              <line x1="22" y1="4" x2="22" y2="12"/>
+              <rect x="11" y="21" width="4" height="4"/>
+              <rect x="21" y="21" width="4" height="4"/>
+            </svg>
+          </div>
+          <div class="why-item-text">
+            <h3>Location à la journée</h3>
+            <p>Dès une journée. Flexibilité maximale.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#E00714" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="18" r="12"/>
+              <ellipse cx="18" cy="18" rx="5" ry="12"/>
+              <line x1="6" y1="18" x2="30" y2="18"/>
+              <path d="M9 12c3 1 6 1.5 9 1.5s6-0.5 9-1.5"/>
+              <path d="M9 24c3-1 6-1.5 9-1.5s6 0.5 9 1.5"/>
+            </svg>
+          </div>
+          <div class="why-item-text">
+            <h3>Martinique toute l'année</h3>
+            <p>Disponible 365 jours, sous le soleil des Antilles.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#E00714" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6l2 6h6l-5 4 2 6-5-3-5 3 2-6-5-4h6z"/>
+              <circle cx="18" cy="18" r="14"/>
+            </svg>
+          </div>
+          <div class="why-item-text">
+            <h3>Réservation simplifiée</h3>
+            <p>Formulaire rapide, tarifs sur demande, contact direct.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section-cta">
+    <span class="cta-watermark">MARTINIQUE</span>
+    <div class="cta-content">
+      <span class="eyebrow">PRÊTS À PARTIR ?</span>
+      <h2 class="cta-title">L'AVENTURE COMMENCE ICI.</h2>
+      <p class="cta-sub">Choisissez votre machine, indiquez vos dates, et nous vous recontactons pour finaliser votre location.</p>
+      <div class="cta-btns">
+        <button class="btn-clip cta-btn-primary" data-open-modal data-moto="">
+          RÉSERVER UNE MOTO
+        </button>
+        <a href="/contact" class="btn-clip cta-btn-outline">
+          NOUS CONTACTER
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <ReservationModal />
+</Layout>
+
+<style>
+  /* HERO */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+    min-height: 600px;
+    background: white;
+    position: relative;
+    overflow: hidden;
+    margin-top: -72px;
+    padding-top: 72px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-topo {
+    position: absolute;
+    right: -5%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52%;
+    opacity: 0.8;
+  }
+
+  .hero-triangle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+  }
+
+  .hero-dots {
+    position: absolute;
+    bottom: 60px;
+    left: 5%;
+    width: 120px;
+    height: 80px;
+    background-image: radial-gradient(circle, #E8E8E5 1px, transparent 1px);
+    background-size: 12px 12px;
+  }
+
+  .hero-left {
+    padding: 48px 6% 48px 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .hero-title {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 5vw, 6rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-title-line {
+    display: block;
+  }
+
+  .hero-title-line.red {
+    color: #E00714;
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: #888888;
+    line-height: 1.65;
+    max-width: 380px;
+  }
+
+  .hero-btn {
+    display: inline-flex;
+    align-self: flex-start;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 16px 36px;
+    background: #E00714;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: background 0.2s;
+    border: none;
+  }
+
+  .hero-btn:hover {
+    background: #c00612;
+  }
+
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    padding-top: 32px;
+    border-top: 1px solid #E8E8E5;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 24px;
+  }
+
+  .stat-item:first-child {
+    padding-left: 0;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    color: #888888;
+    letter-spacing: 0.04em;
+  }
+
+  .stat-sep {
+    width: 1px;
+    height: 40px;
+    background: #E8E8E5;
+    flex-shrink: 0;
+  }
+
+  .hero-right {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* BRANDS */
+  .section-brands {
+    background: #F5F5F3;
+    height: 90px;
+    padding: 0 0 0 8%;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    overflow: hidden;
+  }
+
+  .brands-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: #888888;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .brands-ticker-wrap {
+    flex: 1;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .brands-ticker {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+    padding: 0 32px;
+    white-space: nowrap;
+    will-change: transform;
+    flex-shrink: 0;
+  }
+
+  .brand-logo {
+    height: 44px;
+    width: auto;
+    flex-shrink: 0;
+    filter: grayscale(100%);
+    opacity: 0.45;
+    transition: filter 0.3s, opacity 0.3s;
+    cursor: default;
+  }
+
+  .brand-logo:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  /* NOS MACHINES */
+  .section-machines {
+    padding: 120px 8%;
+    background: white;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 56px;
+  }
+
+  .section-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: #E00714;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+
+  .view-all {
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s;
+  }
+
+  .view-all:hover {
+    color: #E00714;
+  }
+
+  .moto-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  /* POURQUOI NOUS */
+  .section-why {
+    background: #0D0D0D;
+    padding: 100px 8%;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .eyebrow-orange {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: #FF6600;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .why-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    letter-spacing: 0.03em;
+    color: #FFFFFF;
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+
+  .why-text {
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .why-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .why-item {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .why-icon {
+    line-height: 0;
+  }
+
+  .why-item-text h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+  }
+
+  .why-item-text p {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* CTA FINAL */
+  .section-cta {
+    background: white;
+    padding: 100px 8%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18vw;
+    color: #F5F5F3;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 0;
+    line-height: 1;
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 4vw, 4.5rem);
+    letter-spacing: 0.03em;
+    line-height: 1;
+    max-width: 800px;
+  }
+
+  .cta-sub {
+    font-size: 0.95rem;
+    color: #888888;
+    line-height: 1.6;
+    max-width: 560px;
+  }
+
+  .cta-btns {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+  }
+
+  .cta-btn-primary {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 16px 36px;
+    background: #E00714;
+    color: #FFFFFF;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+  }
+
+  .cta-btn-primary:hover {
+    background: #c00612;
+  }
+
+  .cta-btn-outline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 16px 36px;
+    background: transparent;
+    color: #0D0D0D;
+    border: 1px solid #0D0D0D;
+    transition: background 0.2s, color 0.2s;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .cta-btn-outline:hover {
+    background: #0D0D0D;
+    color: #FFFFFF;
+  }
+
+  /* ---- Tablet ---- */
+  @media (max-width: 1024px) {
+    .hero {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 6vw, 5rem);
+    }
+
+    .moto-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .why-grid {
+      gap: 48px;
+    }
+  }
+
+  /* ---- Mobile ---- */
+  @media (max-width: 768px) {
+    /* Hero */
+    .hero {
+      grid-template-columns: 1fr;
+      height: auto;
+      min-height: auto;
+      margin-top: -72px;
+      padding-top: 72px;
+    }
+
+    .hero-left {
+      padding: 40px 6% 32px;
+    }
+
+    .hero-title {
+      font-size: clamp(3.2rem, 12vw, 5rem);
+    }
+
+    .hero-sub {
+      max-width: 100%;
+      font-size: 0.95rem;
+    }
+
+    .hero-right {
+      height: 60vw;
+      min-height: 260px;
+      border-top: 1px solid #E8E8E5;
+    }
+
+    .hero-stats {
+      padding-top: 24px;
+    }
+
+    .stat-item {
+      padding: 0 16px;
+    }
+
+    /* Brands */
+    .section-brands {
+      height: 72px;
+      padding: 0 0 0 6%;
+      gap: 24px;
+    }
+
+    /* Machines */
+    .section-machines {
+      padding: 64px 6%;
+    }
+
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .moto-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    /* Pourquoi nous */
+    .section-why {
+      padding: 64px 6%;
+    }
+
+    .why-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .why-right {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* CTA */
+    .section-cta {
+      padding: 72px 6%;
+    }
+
+    .cta-title {
+      font-size: clamp(1.8rem, 8vw, 3rem);
+    }
+
+    .cta-btns {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .cta-btn-primary,
+    .cta-btn-outline {
+      text-align: center;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .why-right {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-stats {
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .stat-sep {
+      display: none;
+    }
+
+    .stat-item {
+      padding: 0;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ── Scroll-driven infinite brands ticker ──────────────────────────────────
+  (function () {
+    const ticker = document.querySelector('.brands-ticker');
+    if (!ticker) return;
+
+    // Duplicate the set for seamless looping
+    ticker.innerHTML = ticker.innerHTML + ticker.innerHTML;
+
+    // Measure one set width after a paint tick
+    let setWidth = 0;
+    requestAnimationFrame(() => {
+      setWidth = ticker.scrollWidth / 2;
+    });
+
+    let x = 0;
+    let scrollVelocity = 0;
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const currentY = window.scrollY;
+      scrollVelocity = (currentY - lastScrollY) * 0.55;
+      lastScrollY = currentY;
+    }, { passive: true });
+
+    gsap.ticker.add(() => {
+      if (setWidth === 0) return;
+
+      x -= scrollVelocity;
+      scrollVelocity *= 0.82;
+      if (Math.abs(scrollVelocity) < 0.04) scrollVelocity = 0;
+
+      // Wrap seamlessly
+      if (x <= -setWidth) x += setWidth;
+      if (x > 0) x -= setWidth;
+
+      gsap.set(ticker, { x });
+    });
+  })();
+  // ─────────────────────────────────────────────────────────────────────────
+
+  document.addEventListener('DOMContentLoaded', function () {
+      gsap.from('.hero-title-line', {
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power3.out',
+        delay: 0.3
+      });
+
+      gsap.from('.hero-sub, .hero-btn', {
+        y: 30,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power2.out',
+        delay: 0.8
+      });
+
+      gsap.from('.stat-item', {
+        y: 20,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: 'power2.out',
+        delay: 1.1
+      });
+
+      gsap.from('.moto-card', {
+        scrollTrigger: {
+          trigger: '.section-machines',
+          start: 'top 75%'
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: 'power2.out'
+      });
+
+      gsap.from('.why-item', {
+        scrollTrigger: {
+          trigger: '.section-why',
+          start: 'top 70%'
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: 'power2.out'
+      });
+
+      gsap.from('.cta-content > *', {
+        scrollTrigger: {
+          trigger: '.section-cta',
+          start: 'top 75%'
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.12,
+        ease: 'power2.out'
+      });
+  });
+</script>

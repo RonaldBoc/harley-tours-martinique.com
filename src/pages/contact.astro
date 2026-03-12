@@ -1,0 +1,301 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import ReservationModal from '../components/ReservationModal.astro';
+---
+
+<Layout
+  title="Contact & Réservation Moto Martinique | Harley Tours Martinique"
+  description="Contactez-nous pour réserver votre moto en Martinique. Harley-Davidson et Ducati disponibles à la location à la journée. Tarifs sur demande."
+  canonical="https://harley-tours-martinique.com/contact"
+>
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="page-hero-content">
+      <h1 class="page-hero-title">CONTACT</h1>
+      <p class="page-hero-sub">Une question ? Une demande ? Écrivez-nous, nous vous répondons rapidement.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT BODY -->
+  <section class="contact-body">
+    <div class="contact-grid">
+      <!-- Form -->
+      <div class="contact-form-col">
+        <h2 class="form-title">ENVOYEZ-NOUS UN MESSAGE</h2>
+        <ContactForm />
+      </div>
+
+      <!-- Info -->
+      <div class="contact-info-col">
+        <div class="info-block">
+          <h3 class="info-title">INFORMATIONS</h3>
+
+          <a href="mailto:contact@harley-tours-martinique.com" class="info-email">
+            contact@harley-tours-martinique.com
+          </a>
+
+          <div class="info-items">
+            <div class="info-item">
+              <div class="info-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="16" height="14"/>
+                  <line x1="2" y1="9" x2="18" y2="9"/>
+                  <line x1="7" y1="2" x2="7" y2="6"/>
+                  <line x1="13" y1="2" x2="13" y2="6"/>
+                </svg>
+              </div>
+              <span>Réservation à la journée minimum</span>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="10" cy="10" r="8"/>
+                  <line x1="10" y1="6" x2="10" y2="10"/>
+                  <line x1="10" y1="10" x2="13" y2="13"/>
+                </svg>
+              </div>
+              <span>Tarifs communiqués sur demande</span>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10 2C7 2 5 4.5 5 7c0 4 5 11 5 11s5-7 5-11c0-2.5-2-5-5-5z"/>
+                  <circle cx="10" cy="7" r="2"/>
+                </svg>
+              </div>
+              <span>Retrait sur point fixe en Martinique</span>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 12l-3-3 1.5-1.5L9 9l4-4L14.5 6.5z"/>
+                  <circle cx="10" cy="10" r="8"/>
+                </svg>
+              </div>
+              <span>Permis A requis (Permis A2 accepté pour l'Urban Motard 800)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="reserve-block">
+          <p class="reserve-text">Prêt à partir ? Utilisez notre formulaire de réservation rapide.</p>
+          <button class="btn-clip reserve-quick-btn" data-open-modal data-moto="">
+            RÉSERVER UNE MOTO
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ReservationModal />
+</Layout>
+
+<style>
+  .page-hero {
+    background: var(--black);
+    min-height: 280px;
+    padding-top: 110px;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 60px;
+    padding-left: 8%;
+    padding-right: 8%;
+    position: relative;
+    overflow: hidden;
+    margin-top: -72px;
+  }
+
+  .page-hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--red);
+    text-transform: uppercase;
+  }
+
+  .page-hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 6vw, 7rem);
+    letter-spacing: 0.04em;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .page-hero-sub {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.6;
+    max-width: 500px;
+    font-weight: 300;
+  }
+
+  /* CONTACT BODY */
+  .contact-body {
+    padding: 100px 8%;
+    background: white;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 55fr 45fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .form-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 32px;
+  }
+
+  /* INFO COL */
+  .info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .info-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.06em;
+  }
+
+  .info-email {
+    font-size: 1rem;
+    color: var(--red);
+    font-weight: 500;
+    transition: opacity 0.2s;
+    word-break: break-all;
+  }
+
+  .info-email:hover {
+    opacity: 0.8;
+  }
+
+  .info-items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .info-icon {
+    flex-shrink: 0;
+    line-height: 0;
+    color: var(--black);
+    margin-top: 1px;
+  }
+
+  .reserve-block {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--grey2);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .reserve-text {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .reserve-quick-btn {
+    display: inline-flex;
+    align-self: flex-start;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 14px 28px;
+    background: var(--red);
+    color: var(--white);
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+  }
+
+  .reserve-quick-btn:hover {
+    background: #c00612;
+  }
+
+  @media (max-width: 1024px) {
+    .contact-grid {
+      gap: 48px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .page-hero {
+      padding-bottom: 40px;
+      padding-left: 6%;
+      padding-right: 6%;
+      min-height: 220px;
+    }
+
+    .page-hero-sub {
+      max-width: 100%;
+    }
+
+    .contact-body {
+      padding: 56px 6%;
+    }
+
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .reserve-quick-btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  document.addEventListener('DOMContentLoaded', function () {
+      gsap.from('.page-hero-content > *', {
+        y: 30,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: 'power3.out',
+        delay: 0.2
+      });
+
+      gsap.from('.contact-form-col, .contact-info-col', {
+        y: 40,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: 'power2.out',
+        delay: 0.3
+      });
+  });
+</script>

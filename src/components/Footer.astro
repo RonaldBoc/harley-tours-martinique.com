@@ -1,0 +1,111 @@
+---
+---
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/"><img src="/images/logo-htm.png" alt="Harley Tours Martinique" class="footer-logo" /></a>
+    </div>
+    <div class="footer-links">
+      <a href="/">Accueil</a>
+      <a href="/nos-motos">Nos Motos</a>
+      <a href="/contact">Contact</a>
+      <a href="/mentions-legales">Mentions Légales</a>
+    </div>
+    <div class="footer-contact">
+      <a href="mailto:contact@harley-tours-martinique.com" class="footer-email">
+        contact@harley-tours-martinique.com
+      </a>
+        <div class="footer-bottom">
+    <span>Site créé par <a href="https://nerdyweb.fr" target="_blank" rel="noopener" class="footer-credit">nerdyweb</a></span>
+  </div>
+    </div>
+  </div>
+
+</footer>
+
+<style>
+  footer {
+    background: var(--grey);
+    border-top: 1px solid var(--grey2);
+    padding: 30px 8% 28px;
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .footer-logo {
+    height: 55px;
+    width: auto;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 28px;
+  }
+
+  .footer-links a {
+    font-size: 0.85rem;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover {
+    color: var(--black);
+  }
+
+  .footer-email {
+    font-size: 0.85rem;
+    color: var(--red);
+    transition: opacity 0.2s;
+  }
+
+  .footer-email:hover {
+    opacity: 0.8;
+  }
+
+  .footer-bottom {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--grey2);
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .footer-credit {
+    color: var(--muted);
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+
+  .footer-credit:hover {
+    color: var(--black);
+  }
+
+  @media (max-width: 768px) {
+    footer {
+      padding: 40px 6% 24px;
+    }
+
+    .footer-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 28px;
+    }
+
+    .footer-links {
+      flex-wrap: wrap;
+      gap: 16px 24px;
+    }
+  }
+</style>

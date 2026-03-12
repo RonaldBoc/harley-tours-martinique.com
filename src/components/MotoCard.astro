@@ -1,0 +1,184 @@
+---
+interface Props {
+  badge: string;
+  badgeColor: 'orange' | 'red' | 'black';
+  brand: string;
+  brandColor: string;
+  name: string;
+  tagline: string;
+  image: string;
+  reserveLabel: string;
+  reserveId: string;
+}
+
+const { badge, badgeColor, brand, brandColor, name, tagline, image, reserveLabel, reserveId } = Astro.props;
+
+const badgeColorMap = {
+  orange: 'var(--orange)',
+  red: 'var(--red)',
+  black: 'var(--black)'
+};
+---
+
+<div class="moto-card">
+  <div class="card-image-wrap">
+    <img src={image} alt={name} class="card-image" />
+    <span class="card-badge" style={`background:${badgeColorMap[badgeColor]}`}>{badge}</span>
+  </div>
+  <div class="card-body">
+    <div class="card-brand">
+      <span class="brand-dot" style={`background:${brandColor}`}></span>
+      <span class="brand-name">{brand}</span>
+    </div>
+    <h3 class="card-name">{name}</h3>
+    <p class="card-tagline">{tagline}</p>
+    <div class="card-footer">
+      <div class="card-price">
+        <span class="price-label">SUR DEMANDE</span>
+        <span class="price-sub">par journée</span>
+      </div>
+      <button
+        class="btn-clip card-btn"
+        data-open-modal
+        data-moto={reserveId}
+      >
+        RÉSERVER
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .moto-card {
+    background: var(--grey);
+    border: 1px solid var(--grey2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+  }
+
+  .moto-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-image-wrap {
+    height: 220px;
+    background: linear-gradient(135deg, #f8f8f6, #efefeb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card-image {
+    width: 85%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.4s ease;
+  }
+
+  .moto-card:hover .card-image {
+    transform: scale(1.05);
+  }
+
+  .card-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: white;
+    padding: 4px 10px;
+  }
+
+  .card-body {
+    padding: 24px;
+    border-top: 1px solid var(--grey2);
+  }
+
+  .card-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .brand-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .card-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+    line-height: 1.1;
+  }
+
+  .card-tagline {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid var(--grey2);
+  }
+
+  .card-price {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .price-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .price-sub {
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  .card-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 10px 20px;
+    background: var(--black);
+    color: var(--white);
+    transition: background 0.2s;
+  }
+
+  .card-btn:hover {
+    background: var(--red);
+  }
+
+  @media (max-width: 480px) {
+    .card-image-wrap {
+      height: 180px;
+    }
+  }
+</style>

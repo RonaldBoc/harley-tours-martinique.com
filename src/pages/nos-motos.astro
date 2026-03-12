@@ -1,0 +1,215 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MotoSection from '../components/MotoSection.astro';
+import ReservationModal from '../components/ReservationModal.astro';
+---
+
+<Layout
+  title="Nos Motos à Louer en Martinique — Harley-Davidson & Ducati | Harley Tours Martinique"
+  description="Découvrez notre flotte : Harley-Davidson Street Bob 114, Ducati Scrambler 1100 Tribute Pro, Ducati Scrambler Urban Motard 800. Location moto premium en Martinique."
+  canonical="https://harley-tours-martinique.com/nos-motos"
+>
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="page-hero-watermark">MOTOS</div>
+    <div class="page-hero-content">
+      <h1 class="page-hero-title">NOS MOTOS en location</h1>
+      <p class="page-hero-sub">Trois machines d'exception. Harley-Davidson et Ducati, disponibles à la location en Martinique.</p>
+    </div>
+  </section>
+
+  <!-- MOTO SECTIONS -->
+  <div class="motos-wrapper">
+    <MotoSection
+      number="01"
+      brand="Harley-Davidson"
+      brandColor="var(--orange)"
+      category="CRUISER"
+      categoryColor="var(--orange)"
+      name="Street Bob 114"
+      tagline="Le bobber américain dans toute sa pureté. Moteur Milwaukee-Eight 114, guidon mini-ape, finitions noires intégrales. Une attitude qui ne laisse personne indifférent sur les routes de Martinique."
+      image="/images/hd-street-bob-tsp.png"
+      specs={[
+        { label: "Cylindrée", value: "1 868 cm³" },
+        { label: "Puissance", value: "94 ch" },
+        { label: "Couple", value: "161 Nm" },
+        { label: "Poids", value: "297 kg" }
+      ]}
+      conditions={["Permis A requis", "Caution requise"]}
+      engine="Milwaukee-Eight® 114, bicylindre en V, refroidissement par air"
+      layout="image-left"
+      bgColor="var(--grey)"
+      reserveId="street-bob-114"
+    />
+
+    <MotoSection
+      number="02"
+      brand="Ducati"
+      brandColor="var(--red)"
+      category="SCRAMBLER"
+      categoryColor="var(--red)"
+      name="Scrambler 1100 Tribute Pro"
+      tagline="Un hommage vivant aux 50 ans du twin Ducati. Livrée Giallo Ocra iconique, moteur Desmodue 1100, selle marron surpiquée. Pour ceux qui roulent autant avec les yeux qu'avec les mains."
+      image="/images/ducati_scrambler_tribute_hero_section.png"
+      specs={[
+        { label: "Cylindrée", value: "1 079 cm³" },
+        { label: "Puissance", value: "86 ch" },
+        { label: "Couple", value: "88 Nm" },
+        { label: "Poids", value: "211 kg" }
+      ]}
+      conditions={["Permis A requis", "Caution requise"]}
+      engine="Bicylindre en L 90°, distribution Desmodromique, refroidissement par air"
+      layout="image-right"
+      bgColor="var(--grey)"
+      reserveId="scrambler-1100"
+    />
+
+    <MotoSection
+      number="03"
+      brand="Ducati"
+      brandColor="var(--red)"
+      category="URBAN"
+      categoryColor="var(--black)"
+      name="Scrambler Urban Motard 800"
+      tagline="Le Scrambler réinventé pour la route. Pneus sport 17 pouces, empattement réduit, réactivité maximale. La moto idéale pour découvrir les virages de la Martinique."
+      image="/images/Scrambler-Ducati-Urban-Motard-tsp.jpg"
+      specs={[
+        { label: "Cylindrée", value: "803 cm³" },
+        { label: "Puissance", value: "73 ch" },
+        { label: "Couple", value: "66 Nm" },
+        { label: "Poids", value: "196 kg" }
+      ]}
+      conditions={["Permis A ou A2", "Caution requise"]}
+      engine="Bicylindre Desmodue 803 cm³, refroidissement par air"
+      layout="image-left"
+      bgColor="white"
+      reserveId="urban-motard-800"
+    />
+  </div>
+
+  <ReservationModal />
+</Layout>
+
+<style>
+  .page-hero {
+    background: var(--black);
+    min-height: 280px;
+    padding-top: 120px;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 60px;
+    padding-left: 8%;
+    padding-right: 8%;
+    position: relative;
+    overflow: hidden;
+    margin-top: -72px;
+  }
+
+  .page-hero-watermark {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(8rem, 18vw, 22rem);
+    color: white;
+    opacity: 0.04;
+    pointer-events: none;
+    line-height: 1;
+    white-space: nowrap;
+    padding-right: 4%;
+  }
+
+  .page-hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--red);
+    text-transform: uppercase;
+  }
+
+  .page-hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 6vw, 7rem);
+    letter-spacing: 0.04em;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .page-hero-sub {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.6;
+    max-width: 560px;
+    font-weight: 300;
+  }
+
+  .motos-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (max-width: 768px) {
+    .page-hero {
+      padding-bottom: 40px;
+      padding-left: 6%;
+      padding-right: 6%;
+      min-height: 220px;
+    }
+
+    .page-hero-watermark {
+      font-size: clamp(5rem, 28vw, 12rem);
+    }
+
+    .page-hero-sub {
+      max-width: 100%;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', function () {
+    gsap.from('.page-hero-content > *', {
+      y: 30,
+      opacity: 0,
+      duration: 0.7,
+      stagger: 0.12,
+      ease: 'power3.out',
+      delay: 0.2
+    });
+
+    document.querySelectorAll('.moto-section').forEach(function (section) {
+      const isLeft = section.classList.contains('moto-section--image-left');
+
+      gsap.from(section.querySelector('.moto-photo'), {
+        scrollTrigger: { trigger: section, start: 'top 70%' },
+        x: isLeft ? -60 : 60,
+        opacity: 0,
+        duration: 0.9,
+        ease: 'power3.out'
+      });
+
+      gsap.from(section.querySelectorAll('.content-inner > *'), {
+        scrollTrigger: { trigger: section, start: 'top 70%' },
+        y: 30,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power2.out'
+      });
+    });
+  });
+</script>

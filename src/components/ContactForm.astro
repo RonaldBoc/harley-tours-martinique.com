@@ -1,0 +1,191 @@
+---
+---
+<form id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+  <input type="hidden" name="access_key" value="623c9072-aefb-4324-abf1-8183e7b96ed3" />
+  <input type="hidden" name="subject" value="Nouveau message — Harley Tours Martinique" />
+  <input type="hidden" name="redirect" value="false" />
+  <input type="checkbox" name="botcheck" style="display:none;" />
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="cf-prenom">PRÉNOM <span class="req">*</span></label>
+      <input type="text" id="cf-prenom" name="prenom" required placeholder="Votre prénom" />
+    </div>
+    <div class="form-group">
+      <label for="cf-nom">NOM <span class="req">*</span></label>
+      <input type="text" id="cf-nom" name="nom" required placeholder="Votre nom" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="cf-email">EMAIL <span class="req">*</span></label>
+    <input type="email" id="cf-email" name="email" required placeholder="votre@email.com" />
+  </div>
+
+  <div class="form-group">
+    <label for="cf-tel">TÉLÉPHONE <span class="optional">(OPTIONNEL)</span></label>
+    <input type="tel" id="cf-tel" name="telephone" placeholder="+596 696 00 00 00" />
+  </div>
+
+  <div class="form-group">
+    <label for="cf-message">MESSAGE <span class="req">*</span></label>
+    <textarea id="cf-message" name="message" required placeholder="Votre message..." style="min-height:140px;"></textarea>
+  </div>
+
+  <button type="submit" class="btn-clip submit-btn" id="cf-submit">ENVOYER</button>
+
+  <div id="cf-success" class="form-success" style="display:none;">
+    Votre message a bien été envoyé. Nous vous répondrons rapidement.
+  </div>
+  <div id="cf-error" class="form-error" style="display:none;">
+    Une erreur est survenue. Veuillez réessayer.
+  </div>
+</form>
+
+<style>
+  form {
+    width: 100%;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--black);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .req {
+    color: var(--red);
+  }
+
+  .optional {
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--grey);
+    border: 1px solid var(--grey2);
+    font-size: 0.9rem;
+    color: var(--black);
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: 'DM Sans', sans-serif;
+    resize: vertical;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: var(--black);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--muted);
+  }
+
+  .submit-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 16px 48px;
+    background: var(--red);
+    color: var(--white);
+    transition: background 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .submit-btn:hover {
+    background: #c00612;
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .form-success {
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .form-error {
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 600px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .submit-btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const form = document.getElementById('contact-form');
+    const successMsg = document.getElementById('cf-success');
+    const errorMsg = document.getElementById('cf-error');
+    const submitBtn = document.getElementById('cf-submit');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Envoi en cours...';
+      successMsg.style.display = 'none';
+      errorMsg.style.display = 'none';
+
+      try {
+        const data = new FormData(form);
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: data
+        });
+        const json = await res.json();
+        if (json.success) {
+          successMsg.style.display = 'block';
+          form.reset();
+        } else {
+          errorMsg.style.display = 'block';
+        }
+      } catch (err) {
+        errorMsg.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'ENVOYER';
+      }
+    });
+  })();
+</script>
