@@ -302,10 +302,28 @@ import ReservationModal from '../components/ReservationModal.astro';
     cursor: pointer;
     transition: background 0.2s;
     border: none;
+    position: relative;
+    overflow: hidden;
   }
 
   .hero-btn:hover {
-    background: #c00612;
+    background: #ff1f2d;
+  }
+
+  .hero-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -75%;
+    width: 45%;
+    height: 200%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.22), transparent);
+    transform: skewX(-18deg);
+    pointer-events: none;
+  }
+
+  .hero-btn:hover::after {
+    animation: chrome-sweep 0.5s ease forwards;
   }
 
   .hero-stats {
@@ -592,10 +610,33 @@ import ReservationModal from '../components/ReservationModal.astro';
     cursor: pointer;
     border: none;
     transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
   }
 
   .cta-btn-primary:hover {
-    background: #c00612;
+    background: #ff1f2d;
+  }
+
+  .cta-btn-primary::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -75%;
+    width: 45%;
+    height: 200%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.22), transparent);
+    transform: skewX(-18deg);
+    pointer-events: none;
+  }
+
+  .cta-btn-primary:hover::after {
+    animation: chrome-sweep 0.5s ease forwards;
+  }
+
+  @keyframes chrome-sweep {
+    0%   { left: -75%; }
+    100% { left: 125%; }
   }
 
   .cta-btn-outline {
@@ -861,6 +902,47 @@ import ReservationModal from '../components/ReservationModal.astro';
         duration: 0.6,
         stagger: 0.12,
         ease: 'power2.out'
+      });
+
+      // Shockwave helper — red ring bursting from button center
+      function fireShockwave(btn: HTMLElement) {
+        const rect = btn.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2 + window.scrollY;
+        const size = Math.max(rect.width, rect.height) * 2.8;
+        const wave = document.createElement('div');
+        wave.style.cssText = `
+          position: absolute;
+          left: ${cx - size / 2}px;
+          top: ${cy - size / 2}px;
+          width: ${size}px;
+          height: ${size}px;
+          border-radius: 50%;
+          border: 2px solid #E00714;
+          pointer-events: none;
+          z-index: 9999;
+        `;
+        document.body.appendChild(wave);
+        gsap.fromTo(wave,
+          { scale: 0.2, opacity: 0.6 },
+          { scale: 1, opacity: 0, duration: 0.6, ease: 'power2.out', onComplete: () => wave.remove() }
+        );
+      }
+
+      // Both red buttons — shockwave fires first, modal delayed 500ms
+      document.querySelectorAll<HTMLElement>('.hero-btn, .cta-btn-primary').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          if (btn.dataset.modalPending === 'true') {
+            btn.dataset.modalPending = 'false';
+            return; // synthetic re-click: let it bubble to modal handler
+          }
+          e.stopPropagation();
+          fireShockwave(btn);
+          setTimeout(() => {
+            btn.dataset.modalPending = 'true';
+            btn.click();
+          }, 500);
+        });
       });
   });
 </script>

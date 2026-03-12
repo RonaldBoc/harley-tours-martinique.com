@@ -11,7 +11,7 @@
     <h2 class="modal-title">RÉSERVER UNE MOTO</h2>
     <p class="modal-subtitle">Laissez vos coordonnées et nous vous recontactons avec les tarifs et disponibilités.</p>
 
-    <form id="reservation-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+    <form id="reservation-form" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="623c9072-aefb-4324-abf1-8183e7b96ed3" />
       <input type="hidden" name="subject" value="Demande de réservation — Harley Tours Martinique" />
       <input type="hidden" name="redirect" value="false" />
@@ -317,6 +317,13 @@
     // Form submit
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
+
+      // Manual validation for required fields
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
       submitBtn.disabled = true;
       submitBtn.textContent = 'Envoi en cours...';
       successMsg.style.display = 'none';

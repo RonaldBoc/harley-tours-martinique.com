@@ -17,7 +17,7 @@
   </div>
   <div class="slide" id="slide-2" style="transform:translateX(100%);">
     <img src="/images/Scrambler-Ducati-Urban-Motard-tsp.jpg" alt="Ducati Urban Motard 800" class="slide-img" />
-    <div class="slide-badge" id="badge-2" style="top:50%;right:20px;bottom:auto;left:auto;transform:translateY(-50%);">
+    <div class="slide-badge" id="badge-2" style="top:50%;right:20px;bottom:auto;left:auto;">
       <span class="badge-brand">DUCATI</span>
       <span class="badge-model">Urban Motard 800</span>
     </div>
@@ -69,6 +69,7 @@
     flex-direction: column;
     gap: 3px;
     min-width: 160px;
+    will-change: transform;
   }
 
   .badge-brand {
@@ -136,9 +137,9 @@
   const slider = document.getElementById('hero-slider')!;
 
   const badgeStyles = [
-    { top: '20px', right: '20px', bottom: 'auto', left: 'auto', transform: 'none' },
-    { top: 'auto', right: 'auto', bottom: '80px', left: '40px', transform: 'none' },
-    { top: '50%', right: '20px', bottom: 'auto', left: 'auto', transform: 'translateY(-50%)' }
+    { top: '20px', right: '20px', bottom: 'auto', left: 'auto', yPercent: 0 },
+    { top: 'auto', right: 'auto', bottom: '80px', left: '40px', yPercent: 0 },
+    { top: '50%', right: '20px', bottom: 'auto', left: 'auto', yPercent: -50 }
   ];
 
   function setIndicator(idx: number) {
@@ -152,12 +153,16 @@
     badge.style.right = s.right;
     badge.style.bottom = s.bottom;
     badge.style.left = s.left;
-    badge.style.transform = s.transform;
+    // Let GSAP own all transforms — use yPercent instead of CSS transform
+    gsap.set(badge, { x: 0, y: 0, yPercent: s.yPercent });
   }
 
   function showSlide(idx: number) {
     const prev = current;
     if (idx === prev) return;
+
+    // Reset parallax on outgoing badge before animating it out
+    gsap.set(badges[prev], { x: 0, y: 0 });
 
     gsap.to(badges[prev], { opacity: 0, y: -8, duration: 0.25, ease: 'power2.in' });
     gsap.set(slides[idx], { x: '100%', opacity: 1 });
@@ -187,13 +192,11 @@
     }, SLIDE_DURATION);
   }
 
-  // Rafale sequence
   function initSlides() {
     slides.forEach(s => gsap.set(s, { x: '100%', opacity: 1 }));
     badges.forEach(b => { b.style.opacity = '0'; });
   }
 
-  // Wait for load event then start rafale
   window.addEventListener('load', () => {
     initSlides();
     setTimeout(() => {
@@ -226,5 +229,23 @@
     if (autoplayTimer) clearTimeout(autoplayTimer);
     nextSlide();
     startAutoplay();
+  });
+
+  // Badge parallax — entire badge follows the mouse
+  slider.addEventListener('mousemove', (e) => {
+    if (!rafaleComplete) return;
+    const rect = slider.getBoundingClientRect();
+    const nx = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    const ny = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+    gsap.to(badges[current], {
+      x: nx * 10,
+      y: ny * 6,
+      duration: 0.4,
+      ease: 'power2.out'
+    });
+  });
+
+  slider.addEventListener('mouseleave', () => {
+    gsap.to(badges[current], { x: 0, y: 0, duration: 0.6, ease: 'power3.out' });
   });
 </script>
